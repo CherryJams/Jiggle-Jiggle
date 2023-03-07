@@ -976,6 +976,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kidRunningVP: {fileID: 1286389656}
   kidFallingVP: {fileID: 1813426147}
+  canvasManager: {fileID: 1204526217}
 --- !u!4 &1005799025
 Transform:
   m_ObjectHideFlags: 0
@@ -1295,6 +1296,7 @@ RectTransform:
   m_Children:
   - {fileID: 107864697}
   - {fileID: 1269785942}
+  - {fileID: 1407063368}
   - {fileID: 1740776381}
   - {fileID: 1239589200}
   m_Father: {fileID: 0}
@@ -1349,7 +1351,7 @@ RectTransform:
   - {fileID: 2113157364}
   - {fileID: 94989490}
   m_Father: {fileID: 1204526216}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1368,7 +1370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef7f1b4745fb67848bc5af6a9a7d146f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasType: 2
+  canvasType: 3
 --- !u!1 &1269785941
 GameObject:
   m_ObjectHideFlags: 0
@@ -1501,7 +1503,6 @@ GameObject:
   - component: {fileID: 1382810093}
   - component: {fileID: 1382810092}
   - component: {fileID: 1382810091}
-  - component: {fileID: 1382810094}
   m_Layer: 5
   m_Name: Start Button
   m_TagString: Untagged
@@ -1576,7 +1577,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1005799024}
         m_TargetAssemblyTypeName: VPManager, Assembly-CSharp
-        m_MethodName: DebugCheck
+        m_MethodName: PlayUntilEnd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1624,19 +1625,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1382810089}
   m_CullTransparentMesh: 1
---- !u!114 &1382810094
+--- !u!1 &1407063367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1407063368}
+  - component: {fileID: 1407063369}
+  m_Layer: 5
+  m_Name: LevelScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1407063368
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407063367}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1204526216}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1407063369
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1382810089}
+  m_GameObject: {fileID: 1407063367}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84943b72f88d495d9aa9566a51f6f272, type: 3}
+  m_Script: {fileID: 11500000, guid: ef7f1b4745fb67848bc5af6a9a7d146f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  desiredCanvasType: 1
+  canvasType: 1
 --- !u!1 &1505234005
 GameObject:
   m_ObjectHideFlags: 0
@@ -2267,7 +2305,7 @@ RectTransform:
   - {fileID: 1688268463}
   - {fileID: 1685805047}
   m_Father: {fileID: 1204526216}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2286,7 +2324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef7f1b4745fb67848bc5af6a9a7d146f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasType: 1
+  canvasType: 2
 --- !u!1 &1813426146
 GameObject:
   m_ObjectHideFlags: 0
@@ -2303,7 +2341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!328 &1813426147
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -2333,9 +2371,9 @@ VideoPlayer:
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_SkipOnDrop: 1
-  m_Looping: 1
+  m_Looping: 0
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []

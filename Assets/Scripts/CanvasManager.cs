@@ -5,6 +5,7 @@ using UnityEngine;
 public enum CanvasType
 {
     MainMenu,
+    LevelScreen,
     OptionsMenu,
     EndScreen
 }
