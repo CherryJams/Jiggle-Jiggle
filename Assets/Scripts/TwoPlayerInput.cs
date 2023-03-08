@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TwoPlayerInput : MonoBehaviour
@@ -12,6 +10,12 @@ public class TwoPlayerInput : MonoBehaviour
     private GameObject Player2;
     private float speed = 0.04f;
 
+   
+    void Update()
+    {
+        Movements();
+    }
+    
     private void Movements()
     {
 
@@ -27,8 +31,6 @@ public class TwoPlayerInput : MonoBehaviour
             Player2.transform.position = new Vector3(Player2.transform.position.x, Player2.transform.position.y + Input.GetAxis("VerticalPlayer2") * speed, Player2.transform.position.z);
         }
     }
-    void Update()
-    {
-        Movements();
-    }
+
+    
 }

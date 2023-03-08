@@ -1,58 +1,43 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    
     public TextMeshProUGUI timerText;
-    public Button restartButton;
-    public GameObject player;
-    public GameObject timer;
-
-
-    public List<GameObject> targetPrefabs;
-
-
-    private float spawnRate = 1.5f;
-   
+    public List<GameObject> balloons;
+    public CanvasManager canvasManager;
+    public List<GameObject> hazards;
     public bool isGameActive;
-
-    private float spawnRangeY = -11;
-
-    private float spawnRangeX = 8f;
-
-    private float midIntervalRangeX = 6.52f;
-
+    private int lives;
+    [SerializeField] float spawnRate = 1.5f;
+    [SerializeField] float spawnRangeY = -11;
+    [SerializeField] float spawnRangeX = 8f;
+    [SerializeField] float midIntervalRangeX = 6.52f;
     private float midSpawnPositionX;
-
     private float spawnPositionX;
-
     private float spawnRangeZ = -0.07f;
-
-
-
-
-
     private float timeLeft;
-
-
-
-
 
     public void StartGame(int difficulty)
     {
-        timer.SetActive(true);
         timeLeft = 30;
         spawnRate /= difficulty;
         isGameActive = true;
+        lives = 2;
         StartCoroutine(SpawnTarget());
+    }
 
-
+    private void AddBalloonsToList()
+    {
+        Transform balloonsParent = GameObject.FindGameObjectWithTag("Balloons").transform;
+        foreach (GameObject balloonChild in balloonsParent)
+        {
+            balloons.Add(balloonChild);
+        }
     }
 
     // While game is active spawn a random target
@@ -61,40 +46,30 @@ public class GameManager : MonoBehaviour
         while (isGameActive)
         {
             yield return new WaitForSeconds(spawnRate);
-            int index = Random.Range(0, targetPrefabs.Count);
+            int index = Random.Range(0, hazards.Count);
 
             if (isGameActive)
             {
-                Instantiate(targetPrefabs[index], RandomSpawnPosition(), targetPrefabs[index].transform.rotation);
+                Instantiate(hazards[index], RandomSpawnPosition(), hazards[index].transform.rotation);
             }
-
         }
     }
 
     // Generate a random spawn position based on a random index from 0 to 3
     Vector3 RandomSpawnPosition()
     {
-         float[] xIntervals=new float[5];
-    midSpawnPositionX = Random.Range(-midIntervalRangeX,midIntervalRangeX);
+        float[] xIntervals = new float[5];
+        midSpawnPositionX = Random.Range(-midIntervalRangeX, midIntervalRangeX);
         xIntervals[0] = -spawnRangeX;
         xIntervals[1] = midSpawnPositionX;
         xIntervals[2] = midSpawnPositionX;
         xIntervals[3] = midSpawnPositionX;
-        xIntervals[4] =  spawnRangeX;
+        xIntervals[4] = spawnRangeX;
 
         spawnPositionX = xIntervals[Random.Range(0, xIntervals.Length)];
         Vector3 spawnPosition = new Vector3(spawnPositionX, spawnRangeY, spawnRangeZ);
         return spawnPosition;
-
     }
-
-
-
-
-
-
-
-
 
 
     // Stop game, bring up game over text and restart button
@@ -102,40 +77,29 @@ public class GameManager : MonoBehaviour
     {
         if (timeLeft < 0)
         {
-            ;
-        }
-        else
-        {
-            ;
+            SceneManager.LoadScene(2);
         }
 
-        restartButton.gameObject.SetActive(true);
-
+        canvasManager.SwitchCanvas(CanvasType.GameOverScreen);
 
         isGameActive = false;
-
     }
 
-    // Restart game by reloading the scene
-    public void RestartGame()
+
+    void FlyToWaypoint()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        foreach (GameObject player in balloons)
+        {
+            player.GetComponent<CapsuleCollider2D>().enabled = false;
+            player.GetComponent<Waypoints>().MoveToCurrentWaypoint();
+        }
     }
 
-    void Fall()
-    {
-        player.GetComponent<SphereCollider>().enabled = false;
-        player.GetComponent<Rigidbody>().velocity = new Vector3(0, -17, 0);
-    }
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            PauseGame();
-        }
         CountDownTimer();
     }
-    
+
     public void CountDownTimer()
     {
         if (isGameActive)
@@ -145,39 +109,22 @@ public class GameManager : MonoBehaviour
             if (timeLeft < 0)
             {
                 GameOver();
-                Fall();
+                FlyToWaypoint();
             }
         }
     }
-
-
 
     public void Exit()
     {
         Application.Quit();
     }
-    void PauseGame()
+
+    public void LoseLife()
     {
-        if (isGameActive)
+        lives--;
+        if (lives <= 0)
         {
-            Time.timeScale = 0;
+            GameOver();
         }
     }
-
-
-
-
-    public void ResumeGame()
-    {
-        if (isGameActive)
-        {
-            Time.timeScale = 1;
-        }
-
-    }
-    private void OnApplicationQuit()
-    {
-        PlayerPrefs.DeleteAll();
-    }
-
 }

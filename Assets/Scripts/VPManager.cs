@@ -2,12 +2,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Video;
 
-public class VPManager : MonoBehaviour
+public class VPManager : Singleton<VPManager>
 {
     [SerializeField] private VideoPlayer kidRunningVP;
     [SerializeField] private VideoPlayer kidFallingVP;
     [SerializeField] private CanvasManager canvasManager;
-    
+    [SerializeField] private GameManager gameManager;
 
     public void PlayUntilEnd()
     {
@@ -24,8 +24,9 @@ public class VPManager : MonoBehaviour
 
     private void ChangeScene(VideoPlayer source)
     {
-        canvasManager.SwitchCanvas(CanvasType.LevelScreen);
         SceneManager.LoadScene(1);
+        canvasManager.SwitchCanvas(CanvasType.LevelScreen);
+        gameManager.StartGame(1);
     }
 
 }

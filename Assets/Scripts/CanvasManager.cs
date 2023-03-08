@@ -6,7 +6,7 @@ public enum CanvasType
 {
     MainMenu,
     LevelScreen,
-    OptionsMenu,
+    GameOverScreen,
     EndScreen
 }
 

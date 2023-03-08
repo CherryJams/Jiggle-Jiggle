@@ -45,8 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 0}
-  restartButton: {fileID: 0}
-  player: {fileID: 0}
-  timer: {fileID: 0}
+  players: []
+  canvasManager: {fileID: 0}
   targetPrefabs: []
   isGameActive: 0
+  spawnRate: 1.5
+  spawnRangeY: -11
+  spawnRangeX: 8
+  midIntervalRangeX: 6.52
