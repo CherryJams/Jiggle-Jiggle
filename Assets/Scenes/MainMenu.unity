@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &430580532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 430580533}
+  m_Layer: 0
+  m_Name: LevelLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &430580533
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430580532}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.3698846, y: 13.319916, z: -0.08621997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,6 +615,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5540536790624469141, guid: ffdcb6134c44db84f862059118159932, type: 3}
+      propertyPath: m_VideoClip
+      value: 
+      objectReference: {fileID: 32900000, guid: 7c197ef5154101549bdf5324eeb9ac94, type: 3}
+    - target: {fileID: 5540536790624469141, guid: ffdcb6134c44db84f862059118159932, type: 3}
+      propertyPath: m_PlaybackSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5540536790624469141, guid: ffdcb6134c44db84f862059118159932, type: 3}
+      propertyPath: m_AudioOutputMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5540536791892912390, guid: ffdcb6134c44db84f862059118159932, type: 3}
       propertyPath: gameManager
       value: 

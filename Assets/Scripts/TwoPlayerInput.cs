@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class TwoPlayerInput : MonoBehaviour
@@ -9,8 +10,13 @@ public class TwoPlayerInput : MonoBehaviour
     [SerializeField]
     private GameObject Player2;
     private float speed = 0.04f;
+    private GameManager gameManager;
 
-   
+    private void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
+
     void Update()
     {
         Movements();
@@ -19,7 +25,7 @@ public class TwoPlayerInput : MonoBehaviour
     private void Movements()
     {
 
-        if (Player1 && Player2)
+        if (Player1 && Player2 && gameManager.isGameActive)
         {
 
             Player1.transform.position = new Vector3(Player1.transform.position.x + Input.GetAxis("HorizontalPlayer1") * speed, Player1.transform.position.y, Player1.transform.position.z);

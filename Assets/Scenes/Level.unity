@@ -152,10 +152,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36389d3da024c46a6d719a5a00cc67c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   waypoints:
   - {fileID: 750122400}
-  player: {fileID: 126878010}
-  speed: 0
+  balloon: {fileID: 126878010}
+  speed: 4
 --- !u!4 &24978602
 Transform:
   m_ObjectHideFlags: 0
@@ -220,7 +221,7 @@ GameObject:
   - component: {fileID: 126878015}
   m_Layer: 0
   m_Name: Balloon
-  m_TagString: Untagged
+  m_TagString: Balloon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -356,7 +357,7 @@ GameObject:
   - component: {fileID: 179664823}
   m_Layer: 0
   m_Name: Balloon (1)
-  m_TagString: Untagged
+  m_TagString: Balloon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -606,10 +607,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b36389d3da024c46a6d719a5a00cc67c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   waypoints:
   - {fileID: 2102180487}
-  player: {fileID: 179664818}
-  speed: 0
+  balloon: {fileID: 179664818}
+  speed: 4
 --- !u!4 &574604023
 Transform:
   m_ObjectHideFlags: 0
@@ -721,7 +723,7 @@ GameObject:
   - component: {fileID: 750122401}
   m_Layer: 0
   m_Name: P1Waypoint
-  m_TagString: Untagged
+  m_TagString: VictoryWaypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -748,6 +750,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1028439560, guid: 7466d1f093e10e7428f006f8fb497e92, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8414328633362620336, guid: 7466d1f093e10e7428f006f8fb497e92, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1400,7 +1406,7 @@ GameObject:
   - component: {fileID: 2102180488}
   m_Layer: 0
   m_Name: 'P2Waypoint '
-  m_TagString: Untagged
+  m_TagString: VictoryWaypoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

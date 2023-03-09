@@ -8,9 +8,10 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     public TextMeshProUGUI timerText;
-    public List<GameObject> balloons;
+    public BalloonDeath[] balloons;
     public CanvasManager canvasManager;
     public List<GameObject> hazards;
+    public GameObject[] onScreenHazards;
     public bool isGameActive;
     private int lives;
     [SerializeField] float spawnRate = 1.5f;
@@ -24,19 +25,30 @@ public class GameManager : Singleton<GameManager>
 
     public void StartGame(int difficulty)
     {
-        timeLeft = 30;
+        DestroyOnScreenHazards();
+        ResetBalloonsPosition();
+        timeLeft = 2;
         spawnRate /= difficulty;
         isGameActive = true;
         lives = 2;
         StartCoroutine(SpawnTarget());
     }
 
-    private void AddBalloonsToList()
+    private void DestroyOnScreenHazards()
     {
-        Transform balloonsParent = GameObject.FindGameObjectWithTag("Balloons").transform;
-        foreach (GameObject balloonChild in balloonsParent)
+        onScreenHazards = GameObject.FindGameObjectsWithTag("Hazard");
+        foreach (GameObject onScreenHazard in onScreenHazards)
         {
-            balloons.Add(balloonChild);
+            Destroy(onScreenHazard);
+        }
+    }
+
+    private void ResetBalloonsPosition()
+    {
+        balloons = FindObjectsOfType<BalloonDeath>();
+        foreach (BalloonDeath balloon in balloons)
+        {
+            balloon.Reset();
         }
     }
 
@@ -75,24 +87,30 @@ public class GameManager : Singleton<GameManager>
     // Stop game, bring up game over text and restart button
     public void GameOver()
     {
-        if (timeLeft < 0)
-        {
-            SceneManager.LoadScene(2);
-        }
-
         canvasManager.SwitchCanvas(CanvasType.GameOverScreen);
 
         isGameActive = false;
     }
 
+    private void Victory()
+    {
+            SceneManager.LoadScene(2);
+    }
+
 
     void FlyToWaypoint()
     {
-        foreach (GameObject player in balloons)
+        GameObject[] balloons =GameObject.FindGameObjectsWithTag("Balloon");
+        Waypoints[] waypoints = FindObjectsOfType<Waypoints>();
+        foreach (GameObject balloon in balloons)
         {
-            player.GetComponent<CapsuleCollider2D>().enabled = false;
-            player.GetComponent<Waypoints>().MoveToCurrentWaypoint();
+            balloon.GetComponent<CapsuleCollider2D>().enabled = false;
         }
+
+        foreach (Waypoints waypoint in waypoints)
+        {
+           waypoint.MoveToCurrentWaypoint(); 
+        } 
     }
 
     public void Update()
@@ -108,8 +126,7 @@ public class GameManager : Singleton<GameManager>
             timerText.text = "Time: " + Mathf.Round(timeLeft);
             if (timeLeft < 0)
             {
-                GameOver();
-                FlyToWaypoint();
+                isGameActive = false;
             }
         }
     }
