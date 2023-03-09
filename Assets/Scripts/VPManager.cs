@@ -8,6 +8,7 @@ public class VPManager : Singleton<VPManager>
     [SerializeField] private VideoPlayer kidFallingVP;
     [SerializeField] private CanvasManager canvasManager;
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private LevelLoader levelLoader;
 
     public void PlayUntilEnd()
     {
@@ -24,9 +25,7 @@ public class VPManager : Singleton<VPManager>
 
     private void ChangeScene(VideoPlayer source)
     {
-        SceneManager.LoadScene(1);
-        canvasManager.SwitchCanvas(CanvasType.LevelScreen);
-        gameManager.StartGame(1);
+        levelLoader.LoadSceneAfterTransition(1);
     }
 
 }
