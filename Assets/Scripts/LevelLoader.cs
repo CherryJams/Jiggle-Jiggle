@@ -29,4 +29,16 @@ public class LevelLoader : MonoBehaviour
         gameManager.StartGame(1);
         SceneManager.LoadScene(levelIndex);
     }
+     public void LoadEndingAfterTransition(int sceneIndex)
+     {
+         StartCoroutine(LoadEnding(sceneIndex));
+     }
+
+     IEnumerator LoadEnding(int levelIndex)
+     {
+         transition.SetTrigger("Start");
+         yield return new WaitForSeconds(transitionTime);
+         canvasManager.SwitchCanvas(CanvasType.EndScreen);
+         SceneManager.LoadScene(levelIndex);
+     }
 }

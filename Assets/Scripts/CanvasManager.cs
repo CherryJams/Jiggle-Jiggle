@@ -14,6 +14,7 @@ public class CanvasManager : Singleton<CanvasManager>
 {
     List<CanvasController> canvasControllerList;
     CanvasController lastActiveCanvas;
+    [SerializeField] private GameObject thanks;
 
     protected override void Awake()
     {
@@ -37,5 +38,10 @@ public class CanvasManager : Singleton<CanvasManager>
             lastActiveCanvas = desiredCanvas;
         }
         else { Debug.LogWarning("The desired canvas was not found!"); }
+    }
+
+    public void SayThanks()
+    {
+      thanks.SetActive(true); 
     }
 }

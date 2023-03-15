@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
     public TextMeshProUGUI timerText;
     public BalloonDeath[] balloons;
     public CanvasManager canvasManager;
+    [SerializeField] private VPManager vpManager;
     public List<GameObject> hazards;
     public GameObject[] onScreenHazards;
     public bool isGameActive;
@@ -27,10 +28,10 @@ public class GameManager : Singleton<GameManager>
     {
         DestroyOnScreenHazards();
         ResetBalloonsPosition();
-        timeLeft = 2;
+        timeLeft = 90;
         spawnRate /= difficulty;
         isGameActive = true;
-        lives = 2;
+        lives = 1;
         StartCoroutine(SpawnTarget());
     }
 
@@ -88,19 +89,18 @@ public class GameManager : Singleton<GameManager>
     public void GameOver()
     {
         canvasManager.SwitchCanvas(CanvasType.GameOverScreen);
-
         isGameActive = false;
     }
 
     private void Victory()
     {
-            SceneManager.LoadScene(2);
+        SceneManager.LoadScene(2);
     }
 
 
     void FlyToWaypoint()
     {
-        GameObject[] balloons =GameObject.FindGameObjectsWithTag("Balloon");
+        GameObject[] balloons = GameObject.FindGameObjectsWithTag("Balloon");
         Waypoints[] waypoints = FindObjectsOfType<Waypoints>();
         foreach (GameObject balloon in balloons)
         {
@@ -109,12 +109,13 @@ public class GameManager : Singleton<GameManager>
 
         foreach (Waypoints waypoint in waypoints)
         {
-           waypoint.MoveToCurrentWaypoint(); 
-        } 
+            waypoint.MoveToCurrentWaypoint();
+        }
     }
 
     public void Update()
     {
+        Cursor.visible = true;
         CountDownTimer();
     }
 
@@ -127,6 +128,7 @@ public class GameManager : Singleton<GameManager>
             if (timeLeft < 0)
             {
                 isGameActive = false;
+                vpManager.ChangeVideoToEnding();
             }
         }
     }

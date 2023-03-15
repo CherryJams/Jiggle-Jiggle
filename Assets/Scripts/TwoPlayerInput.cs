@@ -9,7 +9,7 @@ public class TwoPlayerInput : MonoBehaviour
     private GameObject Player1;
     [SerializeField]
     private GameObject Player2;
-    private float speed = 0.04f;
+    private float speed = 0.08f;
     private GameManager gameManager;
 
     private void Start()
